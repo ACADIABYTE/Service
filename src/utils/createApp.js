@@ -36,11 +36,7 @@ module.exports = () => {
       cookie: {
         maxAge: 60000 * 60 * 24 * 7,
         httpOnly: false,
-      },
-      store: store.create({
-        mongoUrl:
-          "mongodb+srv://admin:1234@cluster.h3b1zwk.mongodb.net/dragondice",
-      }),
+      }
     })
   );
   app.use(passport.initialize());
