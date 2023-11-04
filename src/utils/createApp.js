@@ -4,7 +4,6 @@ const routes = require("../routes")
 const session = require("express-session")
 const express = require("express")
 const passport = require("passport")
-const store = require("connect-mongo")
 require("../strategies/discord");
 
 module.exports = () => {
