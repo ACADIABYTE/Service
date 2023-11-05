@@ -47,7 +47,7 @@ passport.use(
     {
       clientID: "1131395690300461096",
       clientSecret: "Ub8ERfwnNOCugbU0YdeQgon-UvLllQAd",
-      callbackURL: "http://localhost:3001/auth/discord/redirect",
+      callbackURL: "https://wild-red-skunk-hose.cyclic.app/auth/discord/redirect",
       scope: ["identify", "guilds", "connections"],
     },
     async (accessToken, refreshToken, profile, done) => {
