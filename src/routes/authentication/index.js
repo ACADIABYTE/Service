@@ -16,6 +16,7 @@ router.get(
   "/discord/redirect",
   passport.authenticate("discord"),
   (req, res) => {
+    console.log(req.session)
     res.redirect("http://localhost:3000/dashboard");
   }
 );
