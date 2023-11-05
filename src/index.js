@@ -1,18 +1,50 @@
-const { config } = require("dotenv")
-config();
+require("dotenv").config();
 
-const createApp = require("./utils/createApp")
+const morgan = require("morgan")
+const cors = require("cors")
+const routes = require("./routes")
+const session = require("express-session")
+const express = require("express")
+const passport = require("passport")
 
-async function main() {
-  console.log(`Running in ${process.env.ENVIRONMENT} mode.`);
+require("./strategies/discord");
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+
+//cors
+app.use(
+  cors({
+    credentials: true,
+    origin: ["https://ddmanagementcsr.vercel.app"],
+  })
+);
+
+app.use(
+  session({
+    secret: "SUPERSECRET",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60000 * 60 * 24 * 7,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+//routes
+app.use("/", routes);
+
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
   try {
-    const app = createApp();
-
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => console.log(`Server running as port: ${port}`));
+    console.log(`Running in ${process.env.ENVIRONMENT || "DEV"} mode.`);
+    console.log(`Server running as port: ${port}`);
   } catch (err) {
     console.error(err);
   }
-}
-
-main();
+});

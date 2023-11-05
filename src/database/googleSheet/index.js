@@ -1,6 +1,6 @@
 const { JWT } = require("google-auth-library")
 const { GoogleSpreadsheet } = require("google-spreadsheet")
-
+const key = require("./key.json")
 module.exports = class GoogleSheet {
   constructor(
     _token = "1RTJFmyNgfNg_hkZ1xnNcjioYFUh6vbWuVpGTGdoYsTU",
@@ -12,8 +12,8 @@ module.exports = class GoogleSheet {
 
   async init() {
     const service = new JWT({
-      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      key: process.env.GOOGLE_PRIVATE_KEY,
+      email: key.client_email,
+      key: key.private_key,
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
     //init docs

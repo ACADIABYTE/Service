@@ -1,4 +1,4 @@
-const { Strategy } = require("passport-discord")
+const DiscordStrategy = require('passport-discord').Strategy
 const passport = require("passport")
 const GoogleSheet = require("../database/googleSheet")
 const axios = require("axios")
@@ -43,11 +43,11 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use(
-  new Strategy(
+  new DiscordStrategy(
     {
-      clientID: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISOCRD_CLIENT_SECRET,
-      callbackURL: process.env.DISCORD_REDIRECT_URL,
+      clientID: "1131395690300461096",
+      clientSecret: "Ub8ERfwnNOCugbU0YdeQgon-UvLllQAd",
+      callbackURL: "http://localhost:3001/auth/discord/redirect",
       scope: ["identify", "guilds", "connections"],
     },
     async (accessToken, refreshToken, profile, done) => {
