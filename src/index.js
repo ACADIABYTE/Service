@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 app.use(
   cors({
     credentials: true,
-    origin: ["https://ddmanagementcsr.vercel.app"],
+    origin: ["https://ddmanagementcsr.vercel.app", "http://localhost:5174/", "http://localhost:3000"],
   })
 );
 
